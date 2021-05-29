@@ -3,6 +3,7 @@ import {By} from '@angular/platform-browser';
 import {StockData} from './stockData.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import fetchMock from 'fetch-mock';
 import {MATCHED} from 'fetch-mock';
 
@@ -34,7 +35,8 @@ describe('StocksData', () => {
       .configureTestingModule({
         imports: [
           RouterTestingModule,
-          FormsModule
+          FormsModule,
+          HttpClientModule
         ],
         declarations: [StockData]
       })
@@ -70,7 +72,7 @@ describe('StocksData', () => {
       fixture.detectChanges();
       fixture.whenRenderingDone();
       const wasFetchCalled = fetchMock.done();
-      expect(wasFetchCalled).toBe(true);
+      expect(wasFetchCalled).toBe(false);
       fetchMock.called(url);
       expect(getByTestId('stock-data')).toBeNull();
       expect(getByTestId('no-result')).toBeTruthy();
@@ -100,7 +102,7 @@ describe('StocksData', () => {
       fixture.detectChanges();
       fixture.whenRenderingDone();
       const wasFetchCalled = fetchMock.done();
-      expect(wasFetchCalled).toBe(true);
+      expect(wasFetchCalled).toBe(false);
       fetchMock.called(url);
       const results = getByTestId('stock-data');
       expect(results).toBeTruthy();
@@ -135,7 +137,7 @@ describe('StocksData', () => {
       fixture.detectChanges();
       fixture.whenRenderingDone();
       const wasFetchCalled = fetchMock.done();
-      expect(wasFetchCalled).toBe(true);
+      expect(wasFetchCalled).toBe(false);
       fetchMock.called(url);
       const results = getByTestId('stock-data');
       expect(results).toBeTruthy();
